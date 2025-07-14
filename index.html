@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>To My Love ❤</title>
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background: radial-gradient(circle at top left, #7fc5e8, #8de3f2);
+      font-family: 'Segoe UI', sans-serif;
+      color: white;
+    }
+
+    .hearts, .diamonds, .sparkles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    /* HEART STYLE (Black) */
+    .heart {
+      position: absolute;
+      background: black;
+      transform: rotate(45deg);
+      filter: drop-shadow(0 0 5px black);
+      will-change: transform, opacity;
+      opacity: 0.8;
+    }
+
+    .heart::before, .heart::after {
+      content: '';
+      position: absolute;
+      background: black;
+      border-radius: 50%;
+    }
+
+    .heart::before { top: -10px; left: 0; }
+    .heart::after { top: 0; left: -10px; }
+
+    /* DIAMOND STYLE (Pink) */
+    .diamond {
+      position: absolute;
+      background: #ff69b4;
+      transform: rotate(45deg);
+      will-change: transform, opacity;
+      filter: drop-shadow(0 0 8px #ff69b4);
+      opacity: 0.85;
+    }
+
+    /* Sparkle effect */
+    .sparkle {
+      position: absolute;
+      background: white;
+      border-radius: 50%;
+      filter: drop-shadow(0 0 3px white);
+      animation: sparkleBlink 3s infinite ease-in-out;
+    }
+
+    @keyframes sparkleBlink {
+      0%, 100% { opacity: 0.8; }
+      50% { opacity: 0; }
+    }
+
+    @keyframes rainDown {
+      0% { transform: translateY(-40px) rotate(45deg); opacity: 0.9; }
+      80% { opacity: 0.9; }
+      100% { transform: translateY(110vh) rotate(45deg); opacity: 0; }
+    }
+
+    @keyframes glowPulse {
+      0%, 100% { filter: drop-shadow(0 0 5px); opacity: 0.8; }
+      50% { filter: drop-shadow(0 0 15px); opacity: 1; }
+    }
+
+    .container {
+      position: relative;
+      z-index: 5;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      height: 100vh;
+      padding: 20px;
+    }
+
+    h1 {
+      font-size: 3em;
+      text-shadow: 0 0 15px #ff6ec4, 0 0 30px #f9c5d1;
+      margin-bottom: 20px;
+    }
+
+    .typewriter {
+      color: #ffebf0;
+      overflow: hidden;
+      border-right: 2px solid #fff;
+      white-space: nowrap;
+      letter-spacing: 2px;
+      animation: typing 5s steps(40, end), blink 0.7s step-end infinite;
+      font-size: 1.5em;
+      max-width: 90%;
+      font-weight: bold;
+      padding: 10px 0;
+    }
+
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 24ch }
+    }
+
+    @keyframes blink {
+      50% { border-color: transparent }
+    }
+
+    .button {
+      margin-top: 40px;
+      padding: 18px 45px;
+      font-size: 1.2em;
+      font-weight: bold;
+      background: linear-gradient(135deg, #ff6ec4, #ff9a9e);
+      color: white;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      box-shadow: 0 0 20px rgba(255, 110, 196, 0.6);
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .button:hover {
+      background: linear-gradient(135deg, #fcb5b5, #ffdde1);
+      color: #fff;
+      transform: scale(1.05);
+      box-shadow: 0 0 30px rgba(255, 110, 196, 0.8);
+    }
+
+    .surprise {
+      opacity: 0;
+      max-width: 600px;
+      margin-top: 30px;
+      font-size: 1.2em;
+      background: rgba(255, 255, 255, 0.15);
+      padding: 25px;
+      border-radius: 15px;
+      backdrop-filter: blur(6px);
+      transition: opacity 1.5s ease;
+      pointer-events: none;
+      color: #0a0a0a;
+      text-shadow: 0 0 5px #ff6ec4;
+    }
+
+    .surprise.visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    footer {
+      position: absolute;
+      bottom: 10px;
+      width: 100%;
+      text-align: center;
+      font-size: 0.9em;
+      color: rgba(11, 11, 11, 0.533);
+      user-select: none;
+      z-index: 10;
+    }
+    
+  </style>
+</head>
+<body>
+
+  <div class="hearts" id="hearts-container"></div>
+  <div class="diamonds" id="diamonds-container"></div>
+  <div class="sparkles" id="sparkles-container"></div>
+
+  <div class="container">
+    <h1>To My Beautiful Kabutar 💖</h1>
+    <div class="typewriter">Gutur Gu Gutur Gu Kitni pyari Hai tuu💋</div>
+    <button class="button" onclick="showSurprise()">Tap for a Surprise 💌</button>
+
+    <div class="surprise" id="surprise">
+      <!-- Love message remains unchanged -->
+      Tujhse milkar laga jaise khud ko pa liya ho,<br>  
+      Teri baahon mein jaise har gham ko bhula diya ho.<br>  
+      Har ek pal tere saath kisi khwaab se kam nahi,<br>  
+      Tere bina lagta hai zindagi mein kuch bhi bas baaki nahi. 💫<br><br>
+
+      Tu hans deti hai toh lagta hai jannat mil gayi ho,<br>  
+      Tu ro deti hai toh lagta hai duniya se nikal gayi ho. <br> 
+      Tere chehre ka noor meri subah ki roshni hai, <br> 
+      Tera pyaar meri har raat ki neend ki chadar si hai. 🌙✨<br>
+
+      Main shabd hoon, tu meri zubaan hai,<br>  
+      Main khushbu hoon, tu mera armaan hai.<br>  
+      Tere bina toh sab adhoora lagta hai, <br> 
+      Tu saath ho toh har pal poora lagta hai. 🌹<br>
+
+      Zindagi ka har raaz tujhse kehna hai, <br> 
+      Apni har saans tujhmein jeena hai.  <br>
+      Agar janam milta dubara, toh bhi tujhe hi chahenge, <br> 
+      Kyuki ishq mein sirf tera naam likha hai,<br> woh bhi dil ke kone mein… hamesha ke liye. ❤<br>
+      <!-- ... -->
+      <em>Hidden Message: You are my forever and always. 💞</em><br><br>
+      <strong>"Jaan, mane khub afsos chhe, please mane maaf karjo.<br> Tame mara jevan ni roshni cho ane hu tamne hamesha khush rakhva mangu chu."💖</strong>
+    </div>
+  </div>
+
+  <footer>
+    Love you my Kabutar 💘 just for you💞
+  </footer>
+
+  <audio id="loveAudio" loop>
+    <source src="love.mp3" type="audio/mpeg" />
+  </audio>
+
+  <script>
+    const heartsContainer = document.getElementById('hearts-container');
+    const diamondsContainer = document.getElementById('diamonds-container');
+    const sparklesContainer = document.getElementById('sparkles-container');
+
+    // Hearts
+    for (let i = 0; i < 20; i++) {
+      const heart = document.createElement('div');
+      heart.className = 'heart';
+      const size = 10 + Math.random() * 20;
+      heart.style.width = size + 'px';
+      heart.style.height = size + 'px';
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animation = `rainDown ${(5 + Math.random() * 5)}s linear infinite, glowPulse 3s ease-in-out infinite`;
+      heart.style.animationDelay = `${Math.random() * 10}s`;
+      heartsContainer.appendChild(heart);
+    }
+
+    // Diamonds
+    for (let i = 0; i < 20; i++) {
+      const diamond = document.createElement('div');
+      diamond.className = 'diamond';
+      const size = 12 + Math.random() * 16;
+      diamond.style.width = diamond.style.height = `${size}px`;
+      diamond.style.left = Math.random() * 100 + 'vw';
+      diamond.style.animation = `rainDown ${(4 + Math.random() * 6)}s linear infinite, glowPulse 2.5s ease-in-out infinite`;
+      diamond.style.animationDelay = `${Math.random() * 8}s`;
+      diamondsContainer.appendChild(diamond);
+    }
+
+    // Sparkles
+    for (let i = 0; i < 15; i++) {
+      const sparkle = document.createElement('div');
+      sparkle.className = 'sparkle';
+      sparkle.style.left = Math.random() * 100 + 'vw';
+      sparkle.style.top = Math.random() * 100 + 'vh';
+      sparkle.style.animationDelay = Math.random() * 3 + 's';
+      sparkle.style.animationDuration = (3 + Math.random() * 2) + 's';
+      const size = 4 + Math.random() * 4;
+      sparkle.style.width = sparkle.style.height = size + 'px';
+      sparkle.style.opacity = 0.7 + Math.random() * 0.3;
+      sparklesContainer.appendChild(sparkle);
+    }
+
+    function showSurprise() {
+      const surprise = document.getElementById('surprise');
+      const audio = document.getElementById('loveAudio');
+      surprise.classList.add('visible');
+      audio?.play().catch(e => console.error('Audio play failed:', e));
+    }
+  </script>
+</body>
+</html>
